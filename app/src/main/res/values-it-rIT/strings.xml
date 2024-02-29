@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">CryptoTracker</string>
+    <string name="try_again">Riprova</string>
+    <string name="error">Errore</string>
+    <string name="network_error">Errore di connessione</string>
+    <string name="check_connection">Controlla la tua connessione e riprova</string>
+    <string name="your_wallet">Il tuo portafoglio</string>
+    <string name="top_10_crypto">Top 10 Crypto</string>
+    <string name="official_website">Sito ufficiale</string>
+</resources>
