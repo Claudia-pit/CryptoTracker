@@ -7,4 +7,7 @@
     <string name="your_wallet">Your wallet</string>
     <string name="top_10_crypto">Top 10 Crypto</string>
     <string name="official_website">Official website</string>
+    <string name="network_error_message">Network Error</string>
+    <string name="_7_days">(7 days)</string>
+    <string name="info">Overview </string>
 </resources>

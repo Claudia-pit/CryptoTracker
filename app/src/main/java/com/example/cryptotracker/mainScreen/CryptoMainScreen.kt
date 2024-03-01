@@ -1,5 +1,6 @@
 package com.example.cryptotracker.mainScreen
 
+import android.widget.Toast
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
@@ -23,6 +24,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
@@ -30,7 +32,9 @@ import coil.compose.AsyncImage
 import com.example.cryptotracker.R
 import com.example.cryptotracker.detailSection.CoinViewModel
 import com.example.cryptotracker.mainScreen.data.Crypto
+import com.example.cryptotracker.net.checkForInternet
 import com.example.cryptotracker.ui.theme.Dimens
+import com.example.cryptotracker.ui.theme.Purple900
 
 @Composable
 fun MainScreen(
@@ -41,10 +45,11 @@ fun MainScreen(
 ) {
 
     val crypto by viewModel.uiState.collectAsState()
+    val context = LocalContext.current
 
     Column(
         modifier = Modifier
-            .background(Color.White)
+            .background(Purple900)
             .fillMaxSize()
     ) {
         Column {
@@ -53,15 +58,15 @@ fun MainScreen(
                 modifier = Modifier
                     .padding(horizontal = Dimens.Regular)
                     .padding(top = Dimens.Medium),
-                color = Color.DarkGray,
+                color = Color.White,
                 fontSize = 20.sp
             )
             Text(
-                text = "€123,76",
+                text = "€ 12362,76",
                 modifier = Modifier
                     .padding(horizontal = Dimens.Regular)
                     .padding(top = Dimens.Small, bottom = Dimens.Small),
-                color = Color.Black,
+                color = Color.White,
                 fontSize = 28.sp
             )
         }
@@ -79,14 +84,21 @@ fun MainScreen(
                         text = stringResource(R.string.top_10_crypto),
                         modifier = Modifier
                             .padding(start = Dimens.Regular, top = Dimens.Regular),
-                        color = Color.Black,
+                        color = Purple900,
                         fontSize = 18.sp
                     )
                 }
                 items(crypto.cryptoList.size) { cryptos ->
                     CryptoItem(crypto = crypto.cryptoList[cryptos]) { itemId ->
-                        coinViewModel.getCoin(itemId)
-                        navController.navigate("detail/${itemId}")
+                        if (checkForInternet(context)) {
+                            coinViewModel.getCoin(itemId, context)
+                            if (coinViewModel.uiState.value.coin != null) {
+                                navController.navigate("detail/${itemId}")
+                            }
+                        } else {
+                            Toast.makeText(context, R.string.network_error_message, Toast.LENGTH_LONG).show()
+                        }
+
 
                     }
                 }
@@ -155,12 +167,12 @@ fun CryptoItem(
                     horizontalAlignment = Alignment.End
                 ) {
                     Text(
-                        text = crypto.currentPrice.toString(),
+                        text = "€ " + crypto.currentPrice.toString(),
                         modifier = Modifier,
                         fontSize = 18.sp
                     )
                     Text(
-                        text = crypto.priceChangePercentage24h.toString(),
+                        text = crypto.priceChangePercentage24h.toString() + " %",
                         modifier = Modifier,
                         fontSize = 14.sp,
                         color = if (crypto.priceChangePercentage24h == 0.0) {

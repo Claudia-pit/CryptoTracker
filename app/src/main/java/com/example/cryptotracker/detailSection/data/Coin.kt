@@ -67,6 +67,7 @@ data class MarketDataSingleCoin(
     //val high_24h: High24hCoin,
     //val low_24h: Low24hCoin,
     val price_change_24h_in_currency: PriceChange24hInCurrencyCoin,
+    val price_change_percentage_7d: Double,
     val sparkline_7d: Sparkline7dCoin
 )
 

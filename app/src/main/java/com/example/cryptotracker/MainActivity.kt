@@ -15,7 +15,7 @@ import com.example.cryptotracker.mainScreen.ErrorDialog
 import com.example.cryptotracker.net.checkForInternet
 
 
-class MainActivity() : ComponentActivity() {
+class MainActivity : ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,8 +38,7 @@ class MainActivity() : ComponentActivity() {
         val coinViewModel: CoinViewModel by viewModels()
         setContent {
             Surface(modifier = Modifier.fillMaxSize(), color = MaterialTheme.colorScheme.background) {
-                updateStatusBarColor(ContextCompat.getColor(this, R.color.white))
-                changeStatusBarIconColor(true)
+                updateStatusBarColor(ContextCompat.getColor(this, R.color.purple_900))
                 AppNavigation(cryptoViewModel, coinViewModel)
             }
         }

@@ -8,4 +8,7 @@
     <string name="your_wallet">Il tuo portafoglio</string>
     <string name="top_10_crypto">Top 10 Crypto</string>
     <string name="official_website">Sito ufficiale</string>
+    <string name="network_error_message">Errore di connessione</string>
+    <string name="_7_days">(7 giorni)</string>
+    <string name="info">Informazioni</string>
 </resources>

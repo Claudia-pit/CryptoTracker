@@ -3,9 +3,9 @@ package com.example.cryptotracker.net
 import android.content.Context
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
-import android.os.Build
+import android.util.Log
 
- fun checkForInternet(context: Context): Boolean {
+fun checkForInternet(context: Context): Boolean {
 
     val connectivityManager = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
     val network = connectivityManager.activeNetwork ?: return false
@@ -15,6 +15,18 @@ import android.os.Build
         activeNetwork.hasTransport(NetworkCapabilities.TRANSPORT_WIFI) -> true
         activeNetwork.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR) -> true
         else -> false
+    }
+}
+
+
+fun onExceptionOccurred(e: Exception) {
+    when (e.message) {
+        e.message?.contains("HTTP 429").toString() -> {
+            Log.e("Exception 429", "${e.message}")
+        }
+
+        else -> Log.e("Exception", "${e.message}")
+
     }
 }
 

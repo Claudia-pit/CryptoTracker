@@ -143,12 +143,14 @@ data class MarketDataSingle(
     //val high_24h: High24h,
     //val low_24h: Low24h,
     val price_change_24h_in_currency: PriceChange24hInCurrency,
+    val price_change_percentage_7d: Double,
     val sparkline_7d: Sparkline7d
 ) {
     fun toDomain(): MarketDataSingleCoin {
         return MarketDataSingleCoin(
             current_price = current_price.toDomain(),
             price_change_24h_in_currency = price_change_24h_in_currency.toDomain(),
+            price_change_percentage_7d = price_change_percentage_7d,
             sparkline_7d = sparkline_7d.toDomain()
 
         )
