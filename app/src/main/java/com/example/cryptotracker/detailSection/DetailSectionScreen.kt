@@ -44,7 +44,7 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import coil.compose.AsyncImage
 import com.example.cryptotracker.R
-import com.example.cryptotracker.toDoubleList
+import com.example.cryptotracker.toFloatEntryList
 import com.example.cryptotracker.ui.theme.Dimens
 import com.example.cryptotracker.ui.theme.Purple900
 import com.patrykandpatrick.vico.compose.axis.horizontal.rememberBottomAxis
@@ -65,7 +65,7 @@ import com.patrykandpatrick.vico.core.entry.entryModelOf
 @Composable
 fun DetailSection(navController: NavController, viewModel: CoinViewModel, itemId: String) {
     val coin = viewModel.uiState.collectAsState()
-    val chart = coin.value.coin?.market_data?.sparkline_7d?.price?.toDoubleList() ?: emptyList()
+    val chart = coin.value.coin?.market_data?.sparkline_7d?.price?.toFloatEntryList() ?: emptyList()
     val chartEntryModel = entryModelOf(chart)
     val hyperlinktext = coin.value.coin?.links?.homepage?.get(0)
     val priceChangePercentage7d = coin.value.coin?.market_data?.price_change_percentage_7d

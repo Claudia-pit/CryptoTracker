@@ -5,6 +5,7 @@ import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
 import android.util.Log
 
+//check if internet connection (Wifi/cellular) is available or not
 fun checkForInternet(context: Context): Boolean {
 
     val connectivityManager = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
@@ -18,7 +19,7 @@ fun checkForInternet(context: Context): Boolean {
     }
 }
 
-
+//Handle exception message
 fun onExceptionOccurred(e: Exception) {
     when (e.message) {
         e.message?.contains("HTTP 429").toString() -> {
